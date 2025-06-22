@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Grid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 20px;
+    }
+
+    .product-card {
+      padding: 15px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .in-stock {
+      background-color: #28a745; /* Green */
+    }
+
+    .out-of-stock {
+      background-color: #dc3545; /* Red */
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product-price {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .stock-label {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Product Grid</h2>
+  <div id="product-grid"></div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Product A", price: 50, inStock: true },
+      { id: 2, name: "Product B", price: 30, inStock: false },
+      { id: 3, name: "Product C", price: 70, inStock: true },
+      { id: 4, name: "Product D", price: 20, inStock: false }
+    ];
+
+    const grid = document.getElementById('product-grid');
+
+    products.forEach(product => {
+      // Create product card
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.classList.add(product.inStock ? 'in-stock' : 'out-of-stock');
+
+      // Add product details
+      card.innerHTML = `
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">$${product.price.toFixed(2)}</div>
+        <div class="stock-label">${product.inStock ? 'In Stock' : 'Out of Stock'}</div>
+      `;
+
+      // Add card to grid
+      grid.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
